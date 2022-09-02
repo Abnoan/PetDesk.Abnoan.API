@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetDesk.Abnoan.Domain\PetDesk.Abnoan.Domain.csproj" />
+    <ProjectReference Include="..\PetDesk.Abnoan.Infrastructure\PetDesk.Abnoan.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
