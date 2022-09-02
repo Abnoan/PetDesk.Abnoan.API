@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PetDesk.Abnoan.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace PetDesk.Abnoan.Infrastructure.Persistence
         {
 
         }
+
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }
