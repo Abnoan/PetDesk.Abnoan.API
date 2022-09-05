@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PetDesk.Abnoan.Application.Commands.Appointment.CreateAppointment;
-using MediatR;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using PetDesk.Abnoan.Application.Commands.Appointments.Create;
 
 namespace PetDesk.Abnoan.Application
 {
@@ -8,8 +8,8 @@ namespace PetDesk.Abnoan.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //services
-            //    .AddMediatR(typeof(CreateAppointmentCommand));
+            services
+                .AddMediatR(typeof(CreateAppointmentCommand));
 
             return services;
         }
