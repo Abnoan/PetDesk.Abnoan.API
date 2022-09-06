@@ -2,7 +2,7 @@
 
 namespace PetDesk.Abnoan.Domain.Enums
 {
-    public enum AppointmentType
+    public enum AppointmentTypeEnum
     {
         [Description("Wellness")]
         Wellness,

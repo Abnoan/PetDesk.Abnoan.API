@@ -52,15 +52,19 @@ namespace PetDesk.Abnoan.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetAppointmentByIdQuery(id);
-
-            var appointment = await _mediator.Send(query);
-
-            if (appointment == null)
+            try
             {
-                return NotFound();
+                var appointment = await _mediator.Send(query);
+                if (appointment == null)
+                {
+                    return NotFound();
+                }
+                return Ok(appointment);
             }
-
-            return Ok(appointment);
+            catch (Exception ex)
+            {
+                return BadRequest($"Message : {ex.Message} - Inner Exceptions : {ex.GetInnerExceptions()}");
+            }
         }
 
         /// <summary>
@@ -72,9 +76,16 @@ namespace PetDesk.Abnoan.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateAppointmentCommand command)
         {
-            var id = await _mediator.Send(command);
+            try
+            {
+                var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { Id = id }, command);
+                return CreatedAtAction(nameof(GetById), new { Id = id }, command);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Message : {ex.Message} - Inner Exceptions : {ex.GetInnerExceptions()}");
+            }          
         }
 
 

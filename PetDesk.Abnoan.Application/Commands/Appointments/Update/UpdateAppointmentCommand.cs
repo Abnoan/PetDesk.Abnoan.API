@@ -8,9 +8,9 @@ namespace PetDesk.Abnoan.Application.Commands.Appointments.Update
         public int Id { get; set; }
         public string? PetName { get; set; }
         public DateTime? AppointmentAt { get; set; }
-        public AnimalType? AnimalType { get; set; }
+        public AnimalTypeEnum? AnimalType { get; set; }
         public string? AnimalDescription { get; set; }
-        public AppointmentType? AppointmentType { get; set; }
+        public AppointmentTypeEnum? AppointmentType { get; set; }
         public string? AppointmentDescription { get; set; }
     }
 

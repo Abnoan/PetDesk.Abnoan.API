@@ -30,10 +30,9 @@ namespace PetDesk.Abnoan.Infrastructure.Persistence.Respositories
         public async Task<Appointment> GetAppointmentByIdAsync(int id)
         {
             var appointment = await _context.Appointments.SingleOrDefaultAsync(app => app.Id == id);
-            if (appointment is null)
-            {
+            if (appointment is null)            
                 throw new NullReferenceException();
-            }
+            
 
             return appointment;
         }

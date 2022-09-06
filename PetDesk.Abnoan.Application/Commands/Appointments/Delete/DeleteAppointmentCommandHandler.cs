@@ -12,7 +12,10 @@ namespace PetDesk.Abnoan.Application.Commands.Appointments.Delete
         }
         public async Task<Unit> Handle(DeleteAppointmentCommand request, CancellationToken cancellationToken)
         {
-            await _appointmentRepository.DeleteAppointmentByIdAsync(request.Id);
+            var appointment = await _appointmentRepository.GetAppointmentByIdAsync(request.Id);
+            appointment.Cancel();
+
+            await _appointmentRepository.SaveChangesAsync();
             return Unit.Value;
         }
     }

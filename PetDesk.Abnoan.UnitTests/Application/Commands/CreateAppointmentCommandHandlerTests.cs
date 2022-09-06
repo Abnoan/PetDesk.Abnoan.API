@@ -31,9 +31,9 @@ namespace PetDesk.Abnoan.UnitTests.Application.Commands
             var appointmentCommand = new CreateAppointmentCommand
             {
                 PetName = "Brill",
-                AnimalType = Domain.Enums.AnimalType.Bird,
+                AnimalType = Domain.Enums.AnimalTypeEnum.Bird,
                 AppointmentAt = DateTime.Today,
-                AppointmentType = Domain.Enums.AppointmentType.Surgery
+                AppointmentType = Domain.Enums.AppointmentTypeEnum.Surgery
             };
           
             var handler = new CreateAppointmentCommandHandler(appointmentRepository.Object, mapper);            
@@ -54,9 +54,9 @@ namespace PetDesk.Abnoan.UnitTests.Application.Commands
             var appointmentCommand = new CreateAppointmentCommand
             {
                 PetName = String.Empty,
-                AnimalType = Domain.Enums.AnimalType.Bird,
+                AnimalType = Domain.Enums.AnimalTypeEnum.Bird,
                 AppointmentAt = DateTime.Today,
-                AppointmentType = Domain.Enums.AppointmentType.Surgery
+                AppointmentType = Domain.Enums.AppointmentTypeEnum.Surgery
             };
 
             var handler = new CreateAppointmentCommandHandler(appointmentRepository.Object, mapper);

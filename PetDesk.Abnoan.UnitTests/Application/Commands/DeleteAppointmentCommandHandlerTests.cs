@@ -4,6 +4,7 @@ using PetDesk.Abnoan.Application.Commands.Appointments.Create;
 using PetDesk.Abnoan.Application.Commands.Appointments.Delete;
 using PetDesk.Abnoan.Application.Mapper;
 using PetDesk.Abnoan.Domain.Entities;
+using PetDesk.Abnoan.Domain.Enums;
 using PetDesk.Abnoan.Domain.Repositories;
 
 namespace PetDesk.Abnoan.UnitTests.Application.Commands
@@ -32,11 +33,22 @@ namespace PetDesk.Abnoan.UnitTests.Application.Commands
             var createAppointmentCommand = new CreateAppointmentCommand
             {
                 PetName = "Brill",
-                AnimalType = Domain.Enums.AnimalType.Bird,
+                AnimalType = Domain.Enums.AnimalTypeEnum.Bird,
                 AppointmentAt = DateTime.Today,
-                AppointmentType = Domain.Enums.AppointmentType.Surgery 
+                AppointmentType = Domain.Enums.AppointmentTypeEnum.Surgery
             };
 
+            var appointmentFake = new Appointment
+            {
+                PetName = "Brill",
+                AnimalType = "Bird",         
+                AppointmentAt = DateTime.Today,
+                AppointmentType = "Surgery",
+                Id = 1
+            };
+
+
+            appointmentRepository.Setup(ar => ar.GetAppointmentByIdAsync(It.IsAny<int>()).Result).Returns(appointmentFake);
             var deleteAppointmentCommand = new DeleteAppointmentCommand(1);
 
             var createHandler = new CreateAppointmentCommandHandler(appointmentRepository.Object, mapper);
@@ -44,11 +56,13 @@ namespace PetDesk.Abnoan.UnitTests.Application.Commands
 
             //Act
             await createHandler.Handle(createAppointmentCommand, new CancellationToken());
-            await deleteHandler.Handle(deleteAppointmentCommand, new CancellationToken()); 
+            await deleteHandler.Handle(deleteAppointmentCommand, new CancellationToken());
+            var appointment = await appointmentRepository.Object.GetAppointmentByIdAsync(1);
 
             //Assert
             appointmentRepository.Verify(ar => ar.CreateAppointment(It.IsAny<Appointment>()), Times.Once());
-            appointmentRepository.Verify(ar => ar.DeleteAppointmentByIdAsync(It.IsAny<int>()), Times.Once());
+            appointmentRepository.Verify(ar => ar.GetAppointmentByIdAsync(It.IsAny<int>()), Times.AtLeastOnce());
+            Assert.Equal(AppointmentStatusEnum.Cancelled, appointment.Status);
         }
     }
 }
