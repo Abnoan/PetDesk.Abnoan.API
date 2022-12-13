@@ -1,9 +1,5 @@
 
-# PetDesk - Appointment API
-
-This take-home assignment is provided for PetDesk to evaluate the candidate's code.
-
-
+# Appointment API
 
 
 ## Autores
